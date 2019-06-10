@@ -9,11 +9,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 
+private const val TAG = "MainActivity"
+private const val TEXT_CONTENTS = "TextContent"
+
 class MainActivity : AppCompatActivity() {
 
     private var txtView_ButtonCounter:TextView? = null
     private var numberOfTimesClicked:Int = 0
-    private val TAG = "MainActivity"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +57,7 @@ class MainActivity : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         Log.d(TAG,"onRestoreInstanceState: called")
         super.onRestoreInstanceState(savedInstanceState)
+        txtView_ButtonCounter?.text = savedInstanceState?.getString(TEXT_CONTENTS,"")
     }
 
     override fun onPause() {
@@ -64,6 +68,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle?) {
         Log.d(TAG,"onSaveInstanceState: called")
         super.onSaveInstanceState(outState)
+        outState?.putString(TEXT_CONTENTS,txtView_ButtonCounter?.text.toString())
     }
 
     override fun onStop() {
